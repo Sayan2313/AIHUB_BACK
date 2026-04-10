@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
+from functools import lru_cache
 from sympy import symbols, sympify, lambdify
 ## Model
 class Net(nn.Module):

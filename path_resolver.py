@@ -1,0 +1,1 @@
+qwen_model_path = "weights/qwen_offline_quantized"
