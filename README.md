@@ -1,1 +1,1 @@
-weights are in "saya2313/PEAK" in 🤗HuggingFace
+weights are in "sayan2313/PEAK" in 🤗HuggingFace
