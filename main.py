@@ -1,10 +1,12 @@
+from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import time
 from function_approximator.func_approx import *
 from senti.sentiment_analysis import *
-from LLM.qwen.inference import *
+from LLM.qwen.inference import inference as qwen_inference
+from LLM.peak.main import inference as peak_inference
 ##
 app = FastAPI()
 app.add_middleware(
@@ -44,6 +46,7 @@ async def approximate(data: FuncApproxItem):
     }
 # ----------------------- #
 class LLMItem(BaseModel):
+    model_size : Optional[str] = 'small'
     text: str
 ## Sentiment Analysis
 @app.post("/api/sentiment_analysis/")
@@ -64,7 +67,22 @@ async def sentiment_analyse(data: LLMItem):
 @app.post("/api/qwen/")
 async def qwen(data: LLMItem):
     start = time.perf_counter()
-    pr = inference(data.text)
+    pr = qwen_inference(data.text)
+    end = time.perf_counter()
+    time_ms = (end - start) * 1000
+    return {
+        "predicted": {
+            'Input_text': data.text,
+            'response': pr,
+            'trainTimeMs': round(time_ms, 3),
+        }
+    }
+
+## Peak
+@app.post("/api/peak/")
+async def peak(data: LLMItem):
+    start = time.perf_counter()
+    pr = peak_inference(data)
     end = time.perf_counter()
     time_ms = (end - start) * 1000
     return {

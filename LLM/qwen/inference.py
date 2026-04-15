@@ -6,7 +6,7 @@ def inference(sentence:str):
     model_path = qwen_model_path
     # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_path)
-    # Load model
+    # Load architecture
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
         device_map="auto"
@@ -22,7 +22,7 @@ def inference(sentence:str):
     inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
     outputs = model.generate(
         tokenizer(prompt, return_tensors="pt").to("cuda")["input_ids"],
-        max_new_tokens=100,
+        max_new_tokens=1000,
         eos_token_id=[
             tokenizer.convert_tokens_to_ids("<|im_end|>"),
             tokenizer.eos_token_id  # fallback
