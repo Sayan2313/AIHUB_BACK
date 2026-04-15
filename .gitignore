@@ -2,4 +2,5 @@
 dev/**
 weights/**
 .idea/
-__pycache__/**g
+__pycache__/
+*.pyc
