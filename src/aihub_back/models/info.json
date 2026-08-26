@@ -1,5 +1,21 @@
 {
+  "category" : ["LLM"],
   "LLM": [
-    {"name" :  "Phi"}
+    {
+      "name" :  "Phi",
+      "summary": "General-purpose text model",
+      "description": "Useful for chat, summarization, and everyday text generation tasks.",
+      "capabilities" : ["Text"],
+      "latency" : "High",
+      "price" : "\u20B91"
+    },
+    {
+      "name" :  "Peak",
+      "summary": "Still under development",
+      "description": "No description Available.",
+      "capabilities" : ["Text"],
+      "latency" : "High",
+      "price" : "\u20B91"
+    }
   ]
 }

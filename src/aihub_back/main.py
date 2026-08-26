@@ -1,7 +1,10 @@
+import json
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request , status
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware import Middleware
 
 from aihub_back.core.exceptions import AppException
 from aihub_back.logs import get_logger
@@ -9,16 +12,24 @@ from aihub_back.logs import get_logger
 from aihub_back.routes.llm import llm_router
 
 # ----------------------------------Application----------------------------------
+
 app = FastAPI()
 logger = get_logger()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 @app.get("/api/models/info")
 async def models_info():
     file_path = Path("src/aihub_back/models/info.json")
     if file_path.exists():
-        logger.info(f"File send \"{file_path!s}\" to the Client")
-        return {"content": file_path.read_text()}
+        return json.loads(file_path.read_text())
     else:
         return HTTPException(status_code=404, detail="File not found")
 
