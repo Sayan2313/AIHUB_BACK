@@ -1,21 +1,34 @@
 {
-  "category" : ["LLM"],
-  "LLM": [
+  "models": [
     {
-      "name" :  "Phi",
+      "name": "Phi",
       "summary": "General-purpose text model",
       "description": "Useful for chat, summarization, and everyday text generation tasks.",
-      "capabilities" : ["Text"],
-      "latency" : "High",
-      "price" : "\u20B91"
+      "capabilities": [
+        "Text"
+      ],
+      "latency": "Low",
+      "price": "\u20B91"
     },
     {
-      "name" :  "Peak",
+      "name": "Peak",
       "summary": "Still under development",
       "description": "No description Available.",
-      "capabilities" : ["Text"],
-      "latency" : "High",
-      "price" : "\u20B91"
+      "capabilities": [
+        "Text"
+      ],
+      "latency": "High",
+      "price": "\u20B91"
+    },
+    {
+      "name": "Iden",
+      "summary": "Identify Images",
+      "description": "Useful for identify object in images",
+      "capabilities": [
+        "Image"
+      ],
+      "latency": "High",
+      "price": "\u20B91"
     }
   ]
 }
