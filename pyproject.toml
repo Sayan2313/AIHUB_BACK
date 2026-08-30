@@ -17,24 +17,41 @@ dependencies = [
     "langchain-text-splitters>=1.1.2",
     "pydantic>=2.13.4",
     "pypdf>=6.16.2",
+    "python-multipart>=0.0.32",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
 ]
 
-[project.scripts]
-app = "aihub_back:main"
-
-
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
-
+# Custom Torch Library Index
 [[tool.uv.index]]
-url = "https://download.pytorch.org/whl/cu132"
+name = "pytorch-cu132"
+url =  "https://download.pytorch.org/whl/cu132"
+explicit = true
 
+[tool.uv.sources]
+torch = [{index= "pytorch-cu132"}]
+torchvision = [{index = "pytorch-cu132"}]
+
+# Dev dependencies
 [dependency-groups]
 dev = [
     "fastapi[standard]>=0.141.1",
+    "httpx2>=2.12.0",
     "ipykernel>=7.3.0",
+    "poethepoet>=0.48.0",
+    "pytest>=9.1.1",
     "ruff>=0.16.4",
 ]
+
+[tool.poe]
+envfile = ".env"
+#poethepoet tasks
+[tool.poe.tasks]
+dev = "fastapi dev ./src/aihub_back/main.py"
+start = "fastapi run ./src/aihub_back/main.py"
+lint = "ruff check ./src"
+lint_fix = "ruff check --fix ./src"
+test = "pytest -v"

@@ -1,7 +1,7 @@
 import json
 from json import JSONDecodeError
 from pathlib import Path
-
+import os
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -20,7 +20,7 @@ logger = get_logger()
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.1.4:3000",
+    os.getenv("ALLOWED_CORS_ORIGIN") if os.getenv("ALLOWED_CORS_ORIGIN") else ""
 ]
 
 app.add_middleware(
