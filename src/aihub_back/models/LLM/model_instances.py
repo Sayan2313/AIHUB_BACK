@@ -1,8 +1,8 @@
 import httpx
 
-from aihub_back.core.exceptions import ModelUnavailable
 from aihub_back.models.LLM.phi3.inference import OllamaPhi3
 from aihub_back.models.model_ids import ModelIds
+from aihub_back.server.core.exceptions import ModelUnavailable
 
 
 # Instances

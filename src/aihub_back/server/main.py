@@ -1,16 +1,17 @@
 import json
+import os
 from json import JSONDecodeError
 from pathlib import Path
-import os
+
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from aihub_back.core.exceptions import AppException
-from aihub_back.logs import get_logger
-from aihub_back.routes.llm import llm_router
-from aihub_back.schemas.schemas import ModelsInfoSchema
+from aihub_back.server.core.exceptions import AppException
+from aihub_back.server.logs import get_logger
+from aihub_back.server.routes.llm import llm_router
+from aihub_back.server.schemas.schemas import ModelsInfoSchema
 
 # ----------------------------------Application----------------------------------
 

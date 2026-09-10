@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
-from aihub_back.main import app
-from aihub_back.schemas.schemas import ChatRequestSchema
+
+from aihub_back.server.main import app
+from aihub_back import ChatRequestSchema
 
 client = TestClient(app)
 

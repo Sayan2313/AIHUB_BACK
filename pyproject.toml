@@ -18,6 +18,7 @@ dependencies = [
     "pydantic>=2.13.4",
     "pypdf>=6.16.2",
     "python-multipart>=0.0.32",
+    "regex>=2026.9.10",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
 ]
@@ -50,8 +51,8 @@ dev = [
 envfile = ".env"
 #poethepoet tasks
 [tool.poe.tasks]
-dev = "fastapi dev ./src/aihub_back/main.py"
-start = "fastapi run ./src/aihub_back/main.py"
+dev = "fastapi dev ./src/aihub_back/server/main.py"
+start = "fastapi run ./src/aihub_back/server/main.py"
 lint = "ruff check ./src"
 lint_fix = "ruff check --fix ./src"
 test = "pytest -v"

@@ -1,11 +1,11 @@
-from typing import Annotated, Optional
+from typing import Annotated
 
-from fastapi import APIRouter, UploadFile, File, Form
+from fastapi import APIRouter, File, Form, UploadFile
 
-from aihub_back.core.exceptions import ModelNotFound
 from aihub_back.models.LLM.model_instances import get_llm
 from aihub_back.models.model_ids import ModelIds
-from aihub_back.schemas.schemas import ChatResponseSchema
+from aihub_back.server.core.exceptions import ModelNotFound
+from aihub_back.server.schemas.schemas import ChatResponseSchema
 
 llm_router = APIRouter(prefix="/api/models", tags=["LLM"])
 
@@ -14,7 +14,7 @@ llm_router = APIRouter(prefix="/api/models", tags=["LLM"])
 def response(
     model_name: Annotated[str,Form(...)],
     prompt : Annotated[str,Form(...)],
-    file : Annotated[Optional[UploadFile | None], File()] = None):
+    file : Annotated[UploadFile | None, File()] = None):
     try:
         model_id = ModelIds[model_name].value
     except KeyError:

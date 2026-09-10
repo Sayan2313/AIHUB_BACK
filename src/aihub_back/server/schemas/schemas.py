@@ -1,7 +1,7 @@
-from typing import Literal, Annotated
+from typing import Annotated, Literal
 
+from fastapi import File, UploadFile
 from pydantic import BaseModel, Field
-from fastapi import UploadFile , File
 
 
 class ModelSchema(BaseModel):
