@@ -12,12 +12,12 @@
     },
     {
       "name": "Peak",
-      "summary": "Still under development",
-      "description": "No description Available.",
+      "summary": "Basic Text Model",
+      "description": "Basic Text Model",
       "capabilities": [
         "Text"
       ],
-      "latency": "High",
+      "latency": "Medium",
       "price": "\u20B91"
     },
     {

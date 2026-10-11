@@ -1,0 +1,40 @@
+{
+  "tokenizer": {
+    "type": "BPE",
+    "min_frequency": 5
+  },
+  "model": {
+    "model_type": "Decoder Transformer",
+    "model_name": "Peak",
+    "vocab_size": 4096,
+    "ctx_length": 384,
+    "d_model": 512,
+    "n_layers": 6,
+    "n_heads": 4,
+    "n_kv_heads": 2,
+    "d_ff": 1024
+  },
+  "training": {
+    "batch_size": 64,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 0.0005,
+    "min_learning_rate" : 0.0001,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "epochs": 2,
+    "warmup_ratio": 0.03,
+    "dropout": 0.0
+  },
+  "inference":
+  {
+    "max_tokens" : 300,
+    "temperature" : 1.0,
+    "top_k" : 100,
+    "top_p":   1.0,
+    "repetition_penalty" : 1.1,
+    "sampling_method" :  "softmax"
+  },
+  "data": {
+    "dataset" : "Simplestories"
+  }
+}

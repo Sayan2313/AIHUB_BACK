@@ -11,7 +11,7 @@ llm_router = APIRouter(prefix="/api/models", tags=["LLM"])
 
 
 @llm_router.post("/llm",response_model=ChatResponseSchema)
-def response(
+async def response(
     model_name: Annotated[str,Form(...)],
     prompt : Annotated[str,Form(...)],
     file : Annotated[UploadFile | None, File()] = None):
@@ -20,5 +20,5 @@ def response(
     except KeyError:
         raise ModelNotFound
     llm = get_llm(model_id)
-    res : str = llm.response(prompt)
+    res : str = await llm.response(prompt,file)
     return {'model_name': model_name, 'prompt': prompt, 'response' : res}
