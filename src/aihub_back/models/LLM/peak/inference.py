@@ -1,11 +1,8 @@
 import os
-from pathlib import Path
-from typing import Optional
 
 import torch
 from fastapi import UploadFile
 from torch import nn
-
 
 from aihub_back.models.LLM.core.config import Config, InferenceConfig
 from aihub_back.models.LLM.core.llmbaseclass import LLMBaseclass
@@ -47,7 +44,7 @@ class PeakInference:
             logits = logits / self.config.temperature
             # Top-k sampling
             if self.config.top_k is not None:
-                values, indices = torch.topk(
+                _values, indices = torch.topk(
                     logits,
                     self.config.top_k,
                     dim=-1
@@ -147,6 +144,6 @@ class PeakBase(LLMBaseclass):
         self.tokenizer = BPE.load(file_dir,"peak")
         self.inference = PeakInference(self.model,self.tokenizer,self.config.inference)
         self.inference.load(file_dir + "/peak_weight.pt")
-    async def response(self,text:str,file: Optional[UploadFile] = None)->str:
+    async def response(self,text:str,file: UploadFile | None = None)->str:
         enhanced_prompt : str = "<BOS>" + text
         return self.inference.generate(enhanced_prompt)

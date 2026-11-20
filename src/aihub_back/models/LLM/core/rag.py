@@ -1,9 +1,9 @@
-from typing import List
+import numpy as np
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from pymongo import MongoClient
 from pypdf import PdfReader
 from sentence_transformers import SentenceTransformer
-from pymongo import MongoClient
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-import numpy as np
+
 
 class RAGManager:
     def __init__(self):

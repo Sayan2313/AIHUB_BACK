@@ -3,10 +3,10 @@ import os
 from collections import Counter
 from collections.abc import Iterable
 from itertools import pairwise
+from pathlib import Path
 
 import regex as re
 from tqdm import tqdm
-from pathlib import Path
 
 
 class BPE:
@@ -24,7 +24,7 @@ class BPE:
 
         # Special Tokens
         self.special_tokens = {"<BOS>": 256,"<EOS>": 257, "<PAD>": 258}
-        special_escaped = "|".join(re.escape(tok) for tok in self.special_tokens.keys())
+        special_escaped = "|".join(re.escape(tok) for tok in self.special_tokens)
         self.special_pattern = re.compile(f"({special_escaped})")
         self.vocab.update({v: k.encode("utf-8") for k, v in self.special_tokens.items()})
 
@@ -46,7 +46,7 @@ class BPE:
         for idx,token in enumerate(tokens):
             self.special_tokens[token] = len(self.vocab) + idx
 
-        special_escaped = "|".join(re.escape(tok) for tok in self.special_tokens.keys())
+        special_escaped = "|".join(re.escape(tok) for tok in self.special_tokens)
         self.special_pattern = re.compile(f"({special_escaped})")
         self.vocab.update({v: k.encode("utf-8") for k, v in self.special_tokens.items()})
 

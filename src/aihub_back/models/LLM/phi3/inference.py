@@ -1,19 +1,17 @@
-from pathlib import Path
 from io import BytesIO
-from typing import Optional
+
 from fastapi import UploadFile
 from langchain_ollama import OllamaLLM
 from pypdf import PdfReader
 
 from aihub_back.models.LLM.core.llmbaseclass import LLMBaseclass
-from aihub_back.models.LLM.core.rag import RAGManager
 
 
 class OllamaPhi3(LLMBaseclass):
     def __init__(self):
         super().__init__()
         self.model = OllamaLLM(model="phi3:mini",num_ctx=8192,num_predict=1024,temperature=0.7,top_p=0.9)
-    async def response(self,text:str,file: Optional[UploadFile] = None)->str:
+    async def response(self,text:str,file: UploadFile | None = None)->str:
         # 1. Process an uploaded PDF, if provided
         if file is not None:
             contents = await file.read()
@@ -40,10 +38,8 @@ class OllamaPhi3(LLMBaseclass):
         )
         context = "\n\n".join(text_chunks)
         enhanced_prompt = (f"""<|system|>
-        You are a concise assistant.
+        You are a conversational helpful assistant.
         Answer in 1-3 sentences using simple, direct language.
-        Include only essential information. Avoid repetition, long explanations,
-        unnecessary introductions, and conclusions.
         If context is provided, use it to answer. If the answer is missing,
         say you don't know based on the provided context.
         <|end|>
