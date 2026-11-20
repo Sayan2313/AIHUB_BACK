@@ -53,4 +53,6 @@ class OllamaPhi3(LLMBaseclass):
         <|assistant|>
         """).strip()
 
-        return self.model.invoke(enhanced_prompt).strip()
+        res = await self.model.ainvoke(enhanced_prompt)
+
+        return res.strip()

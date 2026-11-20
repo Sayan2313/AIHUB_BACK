@@ -20,7 +20,7 @@ async def response(
     if model_name == "phi3":
         llm = request.app.state.ollama_llm
     elif model_name == "peak":
-        llm = PeakBase()
+        llm = request.app.state.peak_lm
     # Response
     if llm is not None:
         res : str = await llm.response(prompt,file)

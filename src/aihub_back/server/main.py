@@ -7,9 +7,9 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from langchain_ollama import OllamaLLM
 from pydantic import ValidationError
 
+from aihub_back.models.LLM.peak.inference import PeakBase
 from aihub_back.models.LLM.phi3.inference import OllamaPhi3
 from aihub_back.server.core.exceptions import AppException
 from aihub_back.server.logs import get_logger
@@ -20,11 +20,15 @@ from aihub_back.server.schemas.schemas import ModelsInfoSchema
 # ----------------------------------Application----------------------------------
 @asynccontextmanager
 async def lifespan(app : FastAPI):
-    print("---------Server Started----------")
+    print("Server Starting.......")
 
     ollama_llm = OllamaPhi3()
+    peak_lm = PeakBase()
+
     app.state.ollama_llm = ollama_llm
-    print("Ollama Model Ready....")
+    app.state.peak_lm = peak_lm
+    print("All Models Ready....")
+    print("--------Server Started--------")
     yield
     print("Shutting Down Server....")
 

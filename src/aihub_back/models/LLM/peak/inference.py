@@ -21,7 +21,7 @@ class PeakInference:
         self.tokenizer = tokenizer
         self.config = config
         self.model.eval()
-        print(f"Using : {self.device}")
+        print(f"Using : {self.device} on Peak")
     def load(self, checkpoint_path: str):
         checkpoint = torch.load(
             checkpoint_path,
