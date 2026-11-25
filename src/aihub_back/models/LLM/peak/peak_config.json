@@ -1,40 +1,41 @@
 {
   "tokenizer": {
     "type": "BPE",
-    "min_frequency": 5
+    "min_frequency": 3
   },
   "model": {
     "model_type": "Decoder Transformer",
     "model_name": "Peak",
-    "vocab_size": 4096,
-    "ctx_length": 384,
-    "d_model": 512,
+    "vocab_size": 8192,
+    "ctx_length": 256,
+    "d_model": 256,
     "n_layers": 6,
-    "n_heads": 4,
+    "n_heads": 8,
     "n_kv_heads": 2,
-    "d_ff": 1024
+    "d_ff": 512
   },
   "training": {
     "batch_size": 64,
-    "gradient_accumulation_steps": 4,
-    "learning_rate": 0.0005,
-    "min_learning_rate" : 0.0001,
-    "weight_decay": 0.01,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0003,
+    "min_learning_rate" : 0.00002,
+    "weight_decay": 0.1,
     "max_grad_norm": 1.0,
-    "epochs": 2,
+    "epochs": 4,
     "warmup_ratio": 0.03,
-    "dropout": 0.0
+    "dropout": 0.05
   },
   "inference":
   {
-    "max_tokens" : 300,
-    "temperature" : 0.7,
-    "top_k" : 40,
-    "top_p":   1.0,
-    "repetition_penalty" : 1.1,
+    "max_tokens" : 70,
+    "temperature" : 0.4,
+    "top_k" : 20,
+    "top_p":   0.85,
+    "repetition_penalty" : 1.18,
     "sampling_method" :  "softmax"
   },
   "data": {
-    "dataset" : "Simplestories"
+    "dataset" : ["SimpleStories","TinyStories"],
+    "total" : 275000
   }
 }

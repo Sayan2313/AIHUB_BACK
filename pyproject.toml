@@ -15,12 +15,15 @@ dependencies = [
     "langchain-core>=1.6.0",
     "langchain-ollama>=1.1.0",
     "langchain-text-splitters>=1.1.2",
+    "mlflow-skinny>=3.18.0",
+    "onnxscript>=0.7.2",
     "pydantic>=2.13.4",
     "pymongo>=4.18.3",
     "pypdf>=6.16.2",
     "python-multipart>=0.0.32",
     "regex>=2026.9.10",
     "sentence-transformers>=6.1.0",
+    "tokenizers>=0.23.3",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
     "tqdm>=4.70.1",
@@ -42,12 +45,25 @@ torchvision = [{index = "pytorch-cu132"}]
 # Dev dependencies
 [dependency-groups]
 dev = [
+    "accelerate>=1.16.0",
+    "datasets>=5.2.0",
     "fastapi[standard]>=0.141.1",
     "httpx2>=2.12.0",
+    "huggingface-hub>=1.33.0",
+    "iprogress>=0.4",
     "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.9",
+    "lightning>=2.6.6",
+    "mlflow>=3.18.0",
+    "numpy>=2.5.4",
+    "onnxscript>=0.7.2",
+    "pandas>=3.1.1",
     "poethepoet>=0.48.0",
     "pytest>=9.1.1",
     "ruff>=0.16.4",
+    "safetensors>=0.8.0",
+    "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
 ]
 
 [tool.poe]
@@ -59,3 +75,4 @@ start = "fastapi run ./src/aihub_back/server/main.py"
 lint = "ruff check ./src"
 lint_fix = "ruff check --fix ./src"
 test = "pytest -v"
+mlflow_ui = "uv run mlflow ui --backend-store-uri sqlite:///dev/notebooks/exp_2/runs/mlflow.db --host 127.0.0.1 --port 5000"

@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, File, Form, Request, UploadFile
 
-from aihub_back.models.LLM.peak.inference import PeakBase
 from aihub_back.server.core.exceptions import ModelNotFound
 from aihub_back.server.schemas.schemas import ChatResponseSchema
 

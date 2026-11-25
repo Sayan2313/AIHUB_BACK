@@ -19,16 +19,6 @@
       ],
       "latency": "Medium",
       "price": "\u20B91"
-    },
-    {
-      "name": "Iden",
-      "summary": "Identify Images",
-      "description": "Useful for identify object in images",
-      "capabilities": [
-        "Image"
-      ],
-      "latency": "High",
-      "price": "\u20B91"
     }
   ]
 }

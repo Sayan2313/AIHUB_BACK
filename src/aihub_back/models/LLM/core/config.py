@@ -44,6 +44,7 @@ class InferenceConfig:
 @dataclass
 class DataConfig:
     dataset: str
+    total: int
 
 @dataclass
 class Config:

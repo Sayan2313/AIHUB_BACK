@@ -6,6 +6,15 @@ from aihub_back.models.LLM.core.rope import precompute_rope_cache
 from aihub_back.models.LLM.core.transformer import TransformerBlock
 
 
+def _init_weights(module: nn.Module):
+    if isinstance(module, nn.Linear):
+        nn.init.normal_(module.weight, mean=0.0, std=0.02)
+        if module.bias is not None:
+            nn.init.zeros_(module.bias)
+    elif isinstance(module, nn.Embedding):
+        nn.init.normal_(module.weight, mean=0.0, std=0.02)
+
+
 class PeakModel(nn.Module):
     def __init__(self,config : PeakConfig,dropout=0.1,is_inference_mode=False):
         super().__init__()
@@ -32,6 +41,8 @@ class PeakModel(nn.Module):
 
         self.is_inference_mode = is_inference_mode
         self.config = config
+        # Apply principled weight initialization
+        self.apply(_init_weights)
 
     def forward(self,input_ids: torch.Tensor,attention_mask: torch.Tensor | None = None,kv_cache = None):
         B, S = input_ids.shape
