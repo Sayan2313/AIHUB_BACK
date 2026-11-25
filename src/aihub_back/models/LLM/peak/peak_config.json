@@ -27,11 +27,11 @@
   },
   "inference":
   {
-    "max_tokens" : 70,
-    "temperature" : 0.4,
-    "top_k" : 20,
-    "top_p":   0.85,
-    "repetition_penalty" : 1.18,
+    "max_tokens" : 60,
+    "temperature" : 0.8,
+    "top_k" : 5,
+    "top_p":   0.80,
+    "repetition_penalty" : 1.3,
     "sampling_method" :  "softmax"
   },
   "data": {
